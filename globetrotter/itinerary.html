@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Itinerary</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="box" id="output"></div>
+
+  <script src="app.js"></script>
+  <script>
+  const trips = JSON.parse(localStorage.getItem("trips")) || [];
+  const selectedId = localStorage.getItem("selectedTrip");
+
+  const trip = trips.find(t => t.id == selectedId);
+
+  const output = document.getElementById("output");
+
+  if (!trip) {
+    output.innerHTML = "Trip not found";
+  } else {
+    output.innerHTML = `
+      <h2>${trip.name}</h2>
+      <p>${trip.start} → ${trip.end}</p>
+      <p>Cities: ${trip.cities}</p>
+      <p>Budget: ₹${trip.budget}</p>
+    `;
+  }
+</script>
+
+</body>
+</html>

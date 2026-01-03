@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="box">
+  <h2>My Trips</h2>
+
+  <button onclick="goCreate()">Plan New Trip</button>
+
+  <ul id="tripList"></ul>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const trips = JSON.parse(localStorage.getItem("trips")) || [];
+  const list = document.getElementById("tripList");
+
+  if (trips.length === 0) {
+    list.innerHTML = "<li>No trips yet</li>";
+  } else {
+    trips.forEach(trip => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${trip.name}</strong><br>
+        ${trip.start} → ${trip.end}
+        <br>
+        <button onclick="openTrip(${trip.id})">View</button>
+      `;
+      list.appendChild(li);
+    });
+  }
+</script>
+
+</body>
+</html>
